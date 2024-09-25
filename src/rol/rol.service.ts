@@ -14,18 +14,16 @@ export class RolService {
       
   ) {}
   async create(createRolDto: CreateRolDto) {
-
     return await this.rolRepository.save(createRolDto);
-    
-
   }
 
-  findAll() {
-    return `This action returns all rol`;
+  async findAll() {
+    return await this.rolRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} rol`;
+  async findOne(id: number) {
+    return await this.rolRepository.findOne({where:{
+      id}});
   }
 
   // update(id: number, updateRolDto: UpdateRolDto) {
