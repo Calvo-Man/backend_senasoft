@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
 
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { Transform } from "class-transformer";
+import { IsEmail, IsNotEmpty, IsString, MinLength } from "class-validator";
 
 export class LoginAuthDto {
 
-    @IsNotEmpty()
     @IsEmail()
     email: string;
-
-    @IsNotEmpty()
+  
     @IsString()
+    @MinLength(1)
+    @Transform(({ value }) => value.trim())
     password: string;
 }
