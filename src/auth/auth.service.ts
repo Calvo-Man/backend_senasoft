@@ -1,27 +1,34 @@
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { JwtService } from '@nestjs/jwt';
+
+import * as bcryptjs from 'bcryptjs';
+/* eslint-disable prettier/prettier */
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { UsersService } from 'src/users/users.service';
+import {  RegisterAuthDto } from './dto/register.dto';
+
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
-  }
+  constructor(private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+    ) {}
+  async register(registerAuthDto: RegisterAuthDto) {
 
-  findAll() {
-    return `This action returns all auth`;
-  }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+    const user = await this.usersService.findByEmail(registerAuthDto.email);
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+    if (user) {
+      throw new BadRequestException('Email already exists');
+    }
+    const hashedPassword = await bcryptjs.hash(registerAuthDto.password, 10);
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
-  }
-}
+    await this.usersService.create({
+     ...registerAuthDto,
+      password: hashedPassword,
+    })
+
+    
+
+    
+}}
