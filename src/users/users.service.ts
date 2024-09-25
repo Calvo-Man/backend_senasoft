@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
-import {  Injectable } from '@nestjs/common';
+import {  Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+
+import { Rol } from 'src/rol/entities/rol.entity';
 import { RolService } from 'src/rol/rol.service';
 
 
@@ -12,12 +14,24 @@ import { RolService } from 'src/rol/rol.service';
 export class UsersService {
   constructor(
     @InjectRepository (User) private userRepository:Repository<User>,
-    private rolesService:RolService,
+    private rolService:RolService
+
   ){}
   async create(createUserDto: CreateUserDto) {
-    const user = this.userRepository.save(createUserDto);
-    return user;
+    const rol = await this.rolService.findOne(1);
+    if (!rol) {
+      throw new NotFoundException('Rol no encontrado');
+    }
+    // Asignar el rol al usuario
+    const user = this.userRepository.create({
+      ...createUserDto,
+      rol: rol,   // Usar el rol por defecto o el que se envió
+    });
+  
+    // Guardar el usuario
+    return await this.userRepository.save(user);
   }
+  
   async findAll() {
     return await this.userRepository.find();
   }
