@@ -7,11 +7,14 @@ import { Waste } from './entities/waste.entity';
 import { UsersModule } from 'src/users/users.module';
 import { TypeWasteModule } from 'src/type_waste/type_waste.module';
 
+import { CompanyModule } from 'src/company/company.module';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([Waste]),
     UsersModule,
-    TypeWasteModule
+    TypeWasteModule,
+    CompanyModule
   ],
   controllers: [WasteController],
   providers: [WasteService],

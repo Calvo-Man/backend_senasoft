@@ -3,7 +3,7 @@ import { Gift } from "src/gifts/entities/gift.entity";
 import { Rol } from "src/rol/entities/rol.entity";
 import { Training } from "src/training/entities/training.entity";
 import { Waste } from "src/waste/entities/waste.entity";
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
