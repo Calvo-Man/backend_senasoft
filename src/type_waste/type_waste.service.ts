@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { CreateTypeWasteDto } from './dto/create-type_waste.dto';
 import { UpdateTypeWasteDto } from './dto/update-type_waste.dto';
@@ -16,8 +17,8 @@ export class TypeWasteService {
     return await this.typeWasteRepository.save(typeWaste);
   }
 
-  findAll() {
-    return `This action returns all typeWaste`;
+  async findAll() {
+    return await this.typeWasteRepository.find();
   }
 
   async findOne(id: number) {

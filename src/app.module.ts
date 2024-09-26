@@ -20,7 +20,7 @@ import { TypeWasteModule } from './type_waste/type_waste.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '',
+      password: '12345678',
       database: 'bd_cleanworld',
 
       entities: [__dirname + '/**/*.entity{.ts,.js}'],

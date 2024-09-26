@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { WasteService } from './waste.service';
 import { CreateWasteDto } from './dto/create-waste.dto';
@@ -10,8 +11,8 @@ export class WasteController {
 
   @Post()
   @UseGuards(AuthGuard)
-  create(@Body() createWasteDto: CreateWasteDto) {
-    return this.wasteService.create(createWasteDto);
+  create(@Body() createWasteDto: CreateWasteDto,email:string) {
+    return this.wasteService.create(createWasteDto,email);
   }
 
   @Get()
