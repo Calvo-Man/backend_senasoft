@@ -9,7 +9,7 @@ export class Rol {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({default: 'user'})
     rol_name: string;
 
     @OneToMany(() => User, (user) => user.rol)

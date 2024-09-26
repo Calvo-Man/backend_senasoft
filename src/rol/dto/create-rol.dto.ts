@@ -6,6 +6,4 @@ export class CreateRolDto {
     @IsString()
     @IsNotEmpty()
     rol_name: string;
-
-
 }

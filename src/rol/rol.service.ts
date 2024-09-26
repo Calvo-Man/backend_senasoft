@@ -21,10 +21,10 @@ export class RolService {
     return await this.rolRepository.find();
   }
 
-  async findOne(id: number) {
-    return await this.rolRepository.findOne({where:{
-      id}});
+  async findOneByName() {
+    return await this.rolRepository.findOneBy({ rol_name: 'user' });
   }
+  
 
   // update(id: number, updateRolDto: UpdateRolDto) {
   //   return `This action updates a #${id} rol`;

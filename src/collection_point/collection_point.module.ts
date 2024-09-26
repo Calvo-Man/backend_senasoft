@@ -5,11 +5,14 @@ import { CollectionPointController } from './collection_point.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CollectionPoint } from './entities/collection_point.entity';
 
+import { CompanyModule } from 'src/company/company.module';
+
 @Module({
   imports: [
     TypeOrmModule.forFeature([
         CollectionPoint
-    ])
+    ]),
+    CompanyModule
   ],
   controllers: [CollectionPointController],
   providers: [CollectionPointService],

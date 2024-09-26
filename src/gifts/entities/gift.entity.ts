@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Company } from "src/company/entities/company.entity";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Gift {
@@ -12,4 +14,11 @@ export class Gift {
 
     @Column()
     price: number
+
+    @ManyToOne(()=> Company, (company) => company.gift)
+    company: Company
+    
+    @ManyToMany(() => User, (user) => user.gifts)
+    @JoinTable()
+    users: User[]
 }

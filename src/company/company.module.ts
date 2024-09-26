@@ -11,5 +11,6 @@ import { Company } from './entities/company.entity';
   ],
   controllers: [CompanyController],
   providers: [CompanyService],
+  exports: [CompanyService],
 })
 export class CompanyModule {}
