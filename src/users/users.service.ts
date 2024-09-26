@@ -18,7 +18,7 @@ export class UsersService {
 
   ){}
   async create(createUserDto: CreateUserDto) {
-    const rol = await this.rolService.findOne(1);
+    const rol = await this.rolService.findOneByName();
     if (!rol) {
       throw new NotFoundException('Rol no encontrado');
     }
@@ -36,9 +36,10 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.userRepository.findOneBy({ id });
   }
+  
 
   findByEmail(email: string) {
     return this.userRepository.findOneBy({ email });
@@ -46,6 +47,15 @@ export class UsersService {
 
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
+  }
+
+  async updatePoints(id: number, points: number) {
+    const user = await this.userRepository.findOneBy({ id });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    user.points += points;
+    return await this.userRepository.save(user);
   }
 
   remove(id: number) {

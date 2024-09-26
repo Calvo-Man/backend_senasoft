@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { CollectionPoint } from "src/collection_point/entities/collection_point.entity";
+import { Gift } from "src/gifts/entities/gift.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Company {
@@ -12,4 +14,12 @@ export class Company {
 
     @Column()
     nit: string;
+
+    @OneToMany(()=>CollectionPoint, (collectionPoint) => collectionPoint.company)   
+    collectionPoint: CollectionPoint[]
+
+    @OneToMany(()=> Gift , (gift) => gift.company)
+    gift: Gift[]
+
+
 }

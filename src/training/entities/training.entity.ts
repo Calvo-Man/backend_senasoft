@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Training {
@@ -10,5 +11,8 @@ export class Training {
     @Column()
     name: string
 
+    @ManyToMany(() => User, (user) => user.trainings)
+    @JoinTable()
+    users: User[]
     
 }

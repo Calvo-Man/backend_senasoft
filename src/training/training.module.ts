@@ -4,6 +4,7 @@ import { TrainingService } from './training.service';
 import { TrainingController } from './training.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Training } from './entities/training.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Module({
   imports: [

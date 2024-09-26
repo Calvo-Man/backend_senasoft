@@ -11,6 +11,7 @@ import { CollectionPointModule } from './collection_point/collection_point.modul
 import { TrainingModule } from './training/training.module';
 import { WasteModule } from './waste/waste.module';
 import { GiftsModule } from './gifts/gifts.module';
+import { TypeWasteModule } from './type_waste/type_waste.module';
 
 @Module({
   imports: [
@@ -19,8 +20,9 @@ import { GiftsModule } from './gifts/gifts.module';
       host: 'localhost',
       port: 3306,
       username: 'root',
-      password: '12345678',
+      password: '',
       database: 'bd_cleanworld',
+
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       autoLoadEntities: true,
       synchronize: true,
@@ -33,6 +35,7 @@ import { GiftsModule } from './gifts/gifts.module';
     TrainingModule,
     WasteModule,
     GiftsModule,
+    TypeWasteModule,
   ],
   controllers: [AppController],
   providers: [AppService],
