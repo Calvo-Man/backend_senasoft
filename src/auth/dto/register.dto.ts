@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import { IsEmail,  IsString, MinLength } from "class-validator";
+import { IsEmail,  IsNotEmpty,  IsNumber,  IsString, MinLength } from "class-validator";
 import { Transform } from "class-transformer";
 
 
@@ -24,4 +24,8 @@ export class RegisterAuthDto {
     @MinLength(1)
     @Transform(({ value }) => value.trim())
     password: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    rolId: number;
 }
