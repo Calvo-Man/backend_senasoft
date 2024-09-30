@@ -22,27 +22,31 @@ export class WasteController {
   constructor(private readonly wasteService: WasteService) {}
 
   @Post()
+  @Roles('company', 'admin')
   create(@Body() createWasteDto: CreateWasteDto, email: string) {
     return this.wasteService.create(createWasteDto, email);
   }
 
   @Get()
-  @Roles()
+  @Roles('user', 'admin')
   findAll() {
     return this.wasteService.findAll();
   }
 
   @Get(':id')
+  @Roles('user', 'admin')
   findOne(@Param('id') id: string) {
     return this.wasteService.findOne(+id);
   }
 
   @Patch(':id')
+  @Roles('admin')
   update(@Param('id') id: string, @Body() updateWasteDto: UpdateWasteDto) {
     return this.wasteService.update(+id, updateWasteDto);
   }
 
   @Delete(':id')
+  @Roles('admin')
   remove(@Param('id') id: string) {
     return this.wasteService.remove(+id);
   }
