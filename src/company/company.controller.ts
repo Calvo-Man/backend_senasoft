@@ -1,9 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CompanyService } from './company.service';
 import { CreateCompanyDto } from './dto/create-company.dto';
 import { UpdateCompanyDto } from './dto/update-company.dto';
+import { Roles } from 'src/rol/decorators/role.decorator';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { RolesGuard } from 'src/rol/guard/rol/rol.guard';
 
 @Controller('company')
+ @UseGuards(AuthGuard, RolesGuard)
+ @Roles('Admin')
 export class CompanyController {
   constructor(private readonly companyService: CompanyService) {}
 

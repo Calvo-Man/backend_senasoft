@@ -12,6 +12,7 @@ import { TrainingModule } from './training/training.module';
 import { WasteModule } from './waste/waste.module';
 import { GiftsModule } from './gifts/gifts.module';
 import { TypeWasteModule } from './type_waste/type_waste.module';
+import { RoleSeedModule } from './rol/rol-seed.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { TypeWasteModule } from './type_waste/type_waste.module';
     WasteModule,
     GiftsModule,
     TypeWasteModule,
+    RoleSeedModule,
   ],
   controllers: [AppController],
   providers: [AppService],

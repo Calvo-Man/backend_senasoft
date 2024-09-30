@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
-import { Rol } from "src/rol/entities/rol.entity";
-import { DeepPartial } from "typeorm";
+
+
 export class CreateUserDto {
 
     @IsString()
@@ -23,6 +23,10 @@ export class CreateUserDto {
     @IsString()
     @IsNotEmpty()
     password: string;
+
+    @IsNumber()
+    @IsNotEmpty()
+    rolId:number
 
     
 }

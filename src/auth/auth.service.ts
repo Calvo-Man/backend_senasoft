@@ -3,7 +3,11 @@ import { JwtService } from '@nestjs/jwt';
 
 import * as bcryptjs from 'bcryptjs';
 /* eslint-disable prettier/prettier */
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { RegisterAuthDto } from './dto/register.dto';
 import { LoginAuthDto } from './dto/login.dto';
@@ -28,27 +32,29 @@ export class AuthService {
     });
   }
 
-  async login({ email, password }: LoginAuthDto) {
-    const user = await this.usersService.findByEmail(email);
+  async login(loginAuthDto: LoginAuthDto) {
+    const user = await this.usersService.findByEmail(loginAuthDto.email);
 
     if (!user) {
       throw new UnauthorizedException('Invalid email');
     }
 
-    const isPasswordValid = await bcryptjs.compare(password, user.password);
+    const isPasswordValid = await bcryptjs.compare(loginAuthDto.password, user.password);
 
     if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid password');
     }
-    const payload = { email: user.email,role:user.rol,id:user.id };
+    const payload = { email: user.email, role: user.rol.rol_name, id: user.id };
 
     const token = await this.jwtService.signAsync(payload);
 
+    if (!token) {
+      throw new UnauthorizedException('You have not validate credentials')
+    }
     return {
-      token: token,
-      email: user.email,
-      id:user.id,
-      role:user.rol
+      token,
+      user:user.rol.rol_name
+
     };
   }
 }

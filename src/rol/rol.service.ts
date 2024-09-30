@@ -21,6 +21,10 @@ export class RolService {
     return await this.rolRepository.find();
   }
 
+  async findOne(id: number) {
+    return await this.rolRepository.findOneBy({ id });
+  }
+
   async findOneByName() {
     return await this.rolRepository.findOneBy({ rol_name: 'user' });
   }
