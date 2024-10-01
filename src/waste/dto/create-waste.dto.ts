@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { IsNotEmpty, IsNumber } from "class-validator"
-
-
+import { IsEmail, IsNotEmpty, IsNumber } from "class-validator"
 export class CreateWasteDto {
+
+    @IsEmail()
+    @IsNotEmpty({message: 'email is required'})
+    email:string
 
     @IsNumber({},{message: 'quantity Must be a number'})
     @IsNotEmpty({message: 'quantity is required'})

@@ -25,7 +25,7 @@ export class CreateUserDto {
     password: string;
 
     @IsNumber()
-    @IsNotEmpty()
+    
     rolId:number
 
     

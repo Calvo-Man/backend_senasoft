@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { TypeWaste } from 'src/type_waste/entities/type_waste.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity,  ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Waste {
@@ -10,6 +10,9 @@ export class Waste {
 
   @Column()
   quantity: number;
+
+  @Column()
+  redemptionCode: string
 
   @ManyToOne(() => TypeWaste, (typeWaste) => typeWaste.waste)
   typeWaste: TypeWaste

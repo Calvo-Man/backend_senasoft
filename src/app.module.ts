@@ -13,6 +13,7 @@ import { WasteModule } from './waste/waste.module';
 import { GiftsModule } from './gifts/gifts.module';
 import { TypeWasteModule } from './type_waste/type_waste.module';
 import { RoleSeedModule } from './rol/rol-seed.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -28,6 +29,9 @@ import { RoleSeedModule } from './rol/rol-seed.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    ConfigModule.forRoot({
+      isGlobal: true, // Hace que las variables de entorno sean accesibles globalmente
+    }),
     RolModule,
     UsersModule,
     AuthModule,
@@ -38,6 +42,7 @@ import { RoleSeedModule } from './rol/rol-seed.module';
     GiftsModule,
     TypeWasteModule,
     RoleSeedModule,
+    
   ],
   controllers: [AppController],
   providers: [AppService],
