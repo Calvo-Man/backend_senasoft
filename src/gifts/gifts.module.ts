@@ -4,7 +4,7 @@ import { GiftsService } from './gifts.service';
 import { GiftsController } from './gifts.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Gift } from './entities/gift.entity';
-import { Company } from 'src/company/entities/company.entity';
+
 import { CompanyModule } from 'src/company/company.module';
 
 @Module({
